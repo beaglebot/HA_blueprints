@@ -134,6 +134,13 @@ blueprint:
                 - label: "Long with a timestamp HH:MM"
                   value: "{{ label }}{{ ' was' if type == 'end' else '' }} detected on the {{ camera_name }} camera{{' in the ' if after_zones|length}}{{ after_zones | join(', ') | replace('_', ' ' ) | title }} at {{event['after']['start_time']|timestamp_custom('%H:%M')}}."
               custom_value: true
+        announce:
+          name: Announce on media player
+          description: |
+            Announce event on media player
+          default: false
+          selector:
+            boolean:
         update_sub_label:
           name: Update Sub Labels (Advanced)
           description: |
@@ -947,6 +954,7 @@ variables:
   input_telegram_base_url: !input telegram_base_url
   telegram_base_url: "{{ input_telegram_base_url.rstrip('/') if input_telegram_base_url else base_url }}"
   update_sub_label: !input update_sub_label
+  announce: !input announce
   input_client_id: !input client_id
   client_id: "{{input_client_id if not input_client_id else '/' + input_client_id if '/' not in input_client_id else input_client_id }}"
   alert_once: !input alert_once
@@ -1253,6 +1261,14 @@ actions:
                                   target: "{{telegram_chat_id}}"
                                   caption: "{{message}}"
                                   url: "{{attachment|replace( base_url, telegram_base_url )}}"
+                          - conditions: "{{ announce }}"
+                            sequence:
+                              - action: assist_satellite.announce
+                                metadata: {}
+                                data:
+                                  message: {{message}}
+                                target:
+                                  device_id: 3afc7417bddfb8c431fe2dc7f6789379
                           - conditions: "{{ not notify_group_target }}"
                             sequence:
                               - device_id: !input notify_device
