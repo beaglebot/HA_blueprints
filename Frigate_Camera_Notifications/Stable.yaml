@@ -141,6 +141,10 @@ blueprint:
           default: false
           selector:
             boolean:
+        announce_message:
+          name: Announce Message
+          description: Message to announce
+          default: "A frigate event has occurred"
         update_sub_label:
           name: Update Sub Labels (Advanced)
           description: |
@@ -1266,7 +1270,7 @@ actions:
                               - action: assist_satellite.announce
                                 metadata: {}
                                 data:
-                                  message: "{{ message }}"
+                                  message: "{{ announce_message }}"
                                 target:
                                   device_id: 3afc7417bddfb8c431fe2dc7f6789379
                           - conditions: "{{ not notify_group_target }}"
