@@ -1265,9 +1265,10 @@ actions:
                             sequence:
                               - action: assist_satellite.announce
                                 metadata: {}
+                                data:
+                                  message: "La la la"
                                 target:
                                   device_id: 3afc7417bddfb8c431fe2dc7f6789379
-                                  message: "{{ message }}"
                           - conditions: "{{ not notify_group_target }}"
                             sequence:
                               - device_id: !input notify_device
