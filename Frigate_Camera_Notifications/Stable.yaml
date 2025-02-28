@@ -1,5 +1,5 @@
 blueprint:
-  name: Frigate Notifications (beaglebot) (0.14.0.2w) 
+  name: Frigate Notifications (beaglebot-2) (0.14.0.2w) 
   author: SgtBatten
   homeassistant:
     min_version: 2024.11.0
