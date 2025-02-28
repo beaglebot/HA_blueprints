@@ -1266,7 +1266,6 @@ actions:
                               - action: assist_satellite.announce
                                 metadata: {}
                                 data:
-                                  message: "{{message}}"
                                 target:
                                   device_id: 3afc7417bddfb8c431fe2dc7f6789379
                           - conditions: "{{ not notify_group_target }}"
